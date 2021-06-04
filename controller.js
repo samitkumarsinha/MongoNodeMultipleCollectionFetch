@@ -16,7 +16,8 @@ myfuncs = {
   },
   getJoinData(req, res) {
     var posts = postmodel.postmodel();
-    posts.find({category: 'news'}).populate('posts').exec((err,posts) => {
+    //posts.find({category: 'news'}).populate('posts users').exec((err,posts) => { //based on category
+    posts.find({}).populate('posts users').exec((err,posts) => { //all from both
       res.send(posts);
     })
   },
