@@ -50,7 +50,7 @@ myfuncs = {
       body: "up",
       category: "up",
       namr: "up"
-    }
+    } //replace jsondata with req.body
     var posts = postmodel.postmodel();
     posts.findByIdAndUpdate({_id: req.params.id},jsondata, (err, result) => {
         res.send(result);
