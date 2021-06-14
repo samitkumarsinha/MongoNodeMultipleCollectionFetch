@@ -36,6 +36,30 @@ myfuncs = {
     });
     res.send("save")
   },
+  getinnerjoin(req, res) {
+    var resources = {
+      _id: 1,
+    };
+    var users = usermodel.usermodel();
+    users.aggregate(
+      [
+        {
+          $sort: resources, // use $match, $group etc
+        },
+        {
+          $lookup: {
+            from: "posts", // collection to join
+            localField: "category", //field from the input documents
+            foreignField: "category", //field from the documents of the "from" collection
+            as: "users", // output array field
+          },
+        },
+      ],
+      function (error, data) {
+        res.send(data);
+      }
+    );
+  },
   deldata(req, res){
     var posts = postmodel.postmodel();
     posts.findByIdAndDelete('60b9c1be9838f9220c7778f4', (err, result) => {
